@@ -1,5 +1,5 @@
 demo.service('heal',function(){
-this.myFUnc =function(x){
+this.myFunc =function(x){
 return x.toString(16);
 }
 });
