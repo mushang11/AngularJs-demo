@@ -6,7 +6,20 @@
     <script src="http://ajax.google.com/ajax/libs/angularjs/1.0.4/angular.min.js"></script> //google的CDN。
   </head>
   <body>
-    <table></table>
+    <table ng-controller='demoCtrl'>
+      <tbody>
+      <tr>
+        <td>{{value}}</td>     //data in the controller 
+        <td>{{key}}</td>
+        <td>{{chain}}</td>
+      </tr>
+    </tbody>
+    </table>
+    <filedSet></filedSet>
+    <pre>
+        This file is a simple case which teaches u how to use angularJS in html
+    </pre>
   </body>
   <script type="javascript" src="../app.js">
+  <script type='javascript' src="../controller.js">
 </html>
