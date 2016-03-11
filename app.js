@@ -21,6 +21,25 @@ $routeProvider.when("/index",{templateUrl:'',controller:'',pageTitle:''})
 $locationProvider.html5Mode(true);
 }
 ]);
+
+demo.config($httpProvider){
+ $httpProvider.responseInterceptors.push('securityInterceptor');
+};
+
+demo.provider('securityInterceptor',function(){
+  this.$get = function($location,$q){
+    return function(promise){
+      return promise.then(null,function(response){
+        if(response.status === 403 || response.status === 401){
+          location.path('/noPrivilege');
+        }
+        return $q.reject(response);
+      })
+    }
+  }
+})
+
+
 demo.run(['$rootScope','$location','$window','$http','$filter',function($rootScope,$location,$window,$http,$filter){
   // route changes successfully.
   $rootScope.$on('$routeChangeSuccess',function(next,current){
