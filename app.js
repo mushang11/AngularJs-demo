@@ -13,7 +13,10 @@ angular.element(document).ready(function  () {
  });
 });
 
-
+//权限控制
+//1.UI 处理（根据当前用户的权限，判断页面上的一些内容是否显示）
+//2.路由处理（当用户访问一个它没有权限访问的url,跳转到一个没有权限的错误提示界面）
+//3.HTTP请求处理（当我们发送一个数据请求，如果返回的status是401或者403,则通常重定向到一个错误的页面提示）
 demo.config(['routeProvider','$locationProvider','httpProvider',function($routeProvider,$locationProvider,$httpProvider){
 $routeProvider.when("/index",{templateUrl:'',controller:'',pageTitle:''})
 .when('/demo',{templateUrl:'',controller:'',pageTitle:''})
