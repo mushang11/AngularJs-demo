@@ -1,7 +1,7 @@
 <--angular file inits first-->
 var demo = angular.module('demo',[]);
-
-demo.run (function(permissions){
+var demoPer = angular.module('demo',[]),permissionList;
+demoPer.run (function(permissions){
   permissions.setPermissions(permissionList)
 });
 
@@ -12,8 +12,6 @@ angular.element(document).ready(function  () {
      angular.bootstrap(document,['App']);
  });
 });
-
-
 
 
 demo.config(['routeProvider','$locationProvider','httpProvider',function($routeProvider,$locationProvider,$httpProvider){
@@ -31,8 +29,11 @@ demo.run(['$rootScope','$location','$window','$http','$filter',function($rootSco
     }
   });
   //route starts privilege limit
-  $rootScope.$on('$routeChangeStart',function(event,next,current){
-    //privilege control
+  $rootScope.$on('$routeChangeStart',function(scope,next,current){
+    var permission = next.$route.permission;
+    if(_.isString(permission) && !permissions.hasPermission(permission)){
+      location.path('/noPrivilege');
+    }
   });
   
   $rootScope.$on('$routeChangeError',function(){
