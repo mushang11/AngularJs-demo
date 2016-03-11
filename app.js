@@ -1,5 +1,21 @@
 <--angular file inits first-->
-angular.module('demo',[]);
+var demo = angular.module('demo',[]);
+
+demo.run (function(permissions){
+  permissions.setPermissions(permissionList)
+});
+
+angular.element(document).ready(function  () {
+ // body...
+ $.get('/api/UserPermission',function(data){
+     permissionList = data ;
+     angular.bootstrap(document,['App']);
+ });
+});
+
+
+
+
 demo.config(['routeProvider','$locationProvider','httpProvider',function($routeProvider,$locationProvider,$httpProvider){
 $routeProvider.when("/index",{templateUrl:'',controller:'',pageTitle:''})
 .when('/demo',{templateUrl:'',controller:'',pageTitle:''})
@@ -20,7 +36,7 @@ demo.run(['$rootScope','$location','$window','$http','$filter',function($rootSco
   });
   
   $rootScope.$on('$routeChangeError',function(){
-    // route changes errorly!
+    // route changes error!
   })
   
 }]);

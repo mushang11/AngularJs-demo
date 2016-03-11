@@ -1,5 +1,9 @@
-demo.service('heal',function(){
-this.myFunc =function(x){
-return x.toString(16);
-}
+demo.factory('permissions',function($rootScope){
+  var permissionList;
+  return{
+    setPermissions: function(permissions){
+      permissionList = permissions ;
+      $rootScope.$broadcast('permissionsChange');
+    }
+  };
 });
