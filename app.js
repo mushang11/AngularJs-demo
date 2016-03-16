@@ -64,3 +64,8 @@ demo.run(['$rootScope','$location','$window','$http','$filter',function($rootSco
   
 }]);
 
+//跨域请求访问
+demo.config(function($httpProvider){
+  $httpProvider.defaults.useXDomain = true;
+  delete $httpProvider.defaults.headers.commom['X-Requested-With'];
+})
