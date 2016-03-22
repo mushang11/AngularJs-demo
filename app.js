@@ -1,4 +1,4 @@
-var demo = angular.module('demo',[]);
+var demo = angular.module('demo',['ngRoute']);
 var demoPer = angular.module('demo',[]),permissionList;
 demoPer.run (function(permissions){
   permissions.setPermissions(permissionList)
@@ -19,14 +19,14 @@ angular.element(document).ready(function  () {
 demo.config(['routeProvider','$locationProvider','httpProvider',function($routeProvider,$locationProvider,$httpProvider){
 $routeProvider.when("/index",{templateUrl:'',controller:'',pageTitle:''})
 .when('/demo',{templateUrl:'',controller:'',pageTitle:''})
-.other({'/noPrivilege'});
+.otherwise({redirectTo:'/noPrivilege'});
 $locationProvider.html5Mode(true);
 }
 ]);
 
-demo.config($httpProvider){
+demo.config(['httpProvider'],function($httpProvider){
  $httpProvider.responseInterceptors.push('securityInterceptor');
-};
+});
 
 demo.provider('securityInterceptor',function(){
   this.$get = function($location,$q){
@@ -43,13 +43,13 @@ demo.provider('securityInterceptor',function(){
 
 
 demo.run(['$rootScope','$location','$window','$http','$filter',function($rootScope,$location,$window,$http,$filter){
-  // route changes successfully.
+
   $rootScope.$on('$routeChangeSuccess',function(next,current){
     if(current && current.$$route && current.$$route.pageTitle){
-      // your own code...
+
     }
   });
-  //route starts privilege limit
+
   $rootScope.$on('$routeChangeStart',function(scope,next,current){
     var permission = next.$route.permission;
     if(_.isString(permission) && !permissions.hasPermission(permission)){
