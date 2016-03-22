@@ -5,7 +5,7 @@ demo.filter('myFormat',['heal',function(heal){
 }]);
 
 //  严格情境转义
-demo.filter('',['$sce',function($sce){
+demo.filter('changeShow',['$sce',function($sce){
   return functin(text){
     return $sce.trustAsHtml(text);
   }

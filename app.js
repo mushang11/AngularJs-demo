@@ -1,4 +1,3 @@
-<--angular file inits first-->
 var demo = angular.module('demo',[]);
 var demoPer = angular.module('demo',[]),permissionList;
 demoPer.run (function(permissions){
