@@ -1,14 +1,13 @@
 var demo = angular.module('demo',['ngRoute']);
-var demoPer = angular.module('demo',[]),permissionList;
+var demoPer = angular.module('demoPer',[]),permissionList;
 demoPer.run (function(permissions){
   permissions.setPermissions(permissionList)
 });
 
 angular.element(document).ready(function  () {
- // body...
  $.get('/api/UserPermission',function(data){
      permissionList = data ;
-     angular.bootstrap(document,['App']);
+     angular.bootstrap(document,['demoPer']);
  });
 });
 
@@ -58,7 +57,6 @@ demo.run(['$rootScope','$location','$window','$http','$filter',function($rootSco
   });
   
   $rootScope.$on('$routeChangeError',function(){
-    // route changes error!
   })
   
 }]);
